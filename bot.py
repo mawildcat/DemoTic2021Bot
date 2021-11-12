@@ -4,7 +4,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 
 try:
-    token = "1656962568:AAH1OAw1hEWDNVDA_C-gNBfO5ZL8-gN4d5s"
+    token = "2027163737:AAEVzQD89QfRai3LNJ6kCRUPFH-EClI2278"
 except Exception as e:
     print("Error 001 {}".format(e.args[0]))
 
@@ -19,7 +19,7 @@ except Exception as e:
 def start(bot, update):
     try:
         username = update.message.from_user.username
-        message = "Hello " + username
+        message = "Hola " + username
         update.message.reply_text(message)
     except Exception as e:
         print("Error 003 {}".format(e.args[0]))
@@ -28,27 +28,28 @@ def start(bot, update):
 def help(bot, update):
     try:
         username = update.message.from_user.username
-        update.message.reply_text('Hello {}, please send a image for classify'.format(username))
+        update.message.reply_text('Hola {}, por favor envía una imagen para clasificarla'.format(username))
     except Exception as e:
         print("Error 004 {}".format(e.args[0]))
 
 def getImage(bot, update):
     try:
-        message = "Receiving image..."
+        message = "Recibiendo imagen..."
         update.message.reply_text(message)
-        print(message)
+        #print(message)
 
-        photo_file = bot.getFile(update.message.photo[-1].file_id)
-        id_user = update.message.from_user.id
-        id_file = photo_file.file_id
-        id_analisis = str(id_user) + "-" + str(id_file)
+        file = bot.getFile(update.message.photo[-1].file_id)
+        #id_user = update.message.from_user.id
+        id = file.file_id
+        #id_analisis = str(id_user) + "-" + str(id_file)
 
-        filename = os.path.join('downloads/', '{}.jpg'.format(id_analisis))
-        photo_file.download(filename)
-        message = "Image received"
+        #filename = os.path.join('downloads/', '{}.jpg'.format(id))
+        #file.download(filename)
+
+        message = "Imagen recibida"
         update.message.reply_text(message)
-        print(message)
-        print("Waiting image..")
+        #print(message)
+        #print("Esperando imagen...")
     except Exception as e:
         print("Error 005 {}".format(e.args[0]))
 
@@ -56,8 +57,8 @@ def getImage(bot, update):
 def echo(bot, update):
     try:
         update.message.reply_text(update.message.text)
-        print("Receiving text...")
-        print("Waiting for another test...")
+        print("Recibiendo texto...")
+        print("Esperando otro texto...")
         print(update.message.from_user)
     except Exception as e:
         print("Error 006 {}".format(e.args[0]))
